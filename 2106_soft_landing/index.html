@@ -25,13 +25,100 @@
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="css/tooplate-style.css">
-
+    <script>
+        $('.collapse').on('show.bs.collapse', function () {
+            $('.collapse.in').collapse('hide');
+        });
+    </script>
 
     <style>
         .tableModulos {
             width: 100%;
             font-size: 1.25em;
         }
+
+        .hiddenRow {
+            padding: 0 !important;
+        }
+        html{  
+            background:linear-gradient(to top, #3093c7, #1c5a85);  
+            background-color:#3093c7;
+            background-repeat:no-repeat;
+            color:#eee;
+        }
+        a{
+            cursor:pointer;
+        }
+
+        /*Gallery Container*/
+        .image-gallery{
+            position:relative;  
+            margin:0 auto;
+            width:600px;  
+            border-radius:20px;  
+        }
+        /*Sets Big Image style*/
+        .image-gallery .big-image{
+            width:600px;
+            height:360px;   
+            margin:0 auto;  
+            position:relative;
+        }
+        .image-gallery .big-image img{
+            opacity:0;position:absolute;left:0px;top:0px; width:600px;
+            margin:0 auto;
+            transition: opacity 350ms;   
+        }
+
+        /*Selected image display*/
+        .image-gallery .big-image img:target{opacity:1;}
+        /*on select image display none the default image*/
+        .image-gallery .big-image img:target ~ img#default{opacity:0;}
+
+        /*Show Default Image in first load*/
+        .image-gallery .big-image img#default{opacity:1;}
+
+
+        /***Button***/
+        .image-gallery .button{
+            font-weight:bold;
+            font-size:30px;
+            display:inline-block;
+            transform:scale(1,2);
+            background-color:#ccc;
+            color:#222;
+            padding:0 10px;   
+        }
+        .image-gallery .prev{position:absolute; left:0; top:378px;}
+        .image-gallery .next{position:absolute; right:0; top:378px;}
+
+        /***move thumbs on click on buttons***/
+        .image-gallery .prev:active ~ .thumbs  ul{
+            transform:translateX(0%);
+            transition:3s all;
+        }
+        .image-gallery  .next:active ~ .thumbs  ul{
+            transform:translateX(-90%);
+            transition:3s all;  
+        }
+            
+        /***thumbs***/
+        .image-gallery .thumbs{
+            overflow:hidden; white-space:nowrap; margin:0 45px;
+        }
+        .image-gallery .thumbs ul{
+            float:left; transition:999999s all; transform:translateX(0);
+        }
+        .image-gallery .thumbs li{display:inline-block; margin-right:3px;}
+        .image-gallery .thumbs li a:hover{opacity:1;}
+        .image-gallery .thumbs li a{opacity:0.85;}
+        .image-gallery .thumbs li a:focus{opacity:1;}
+        .image-gallery .thumbs li img{width:128px;}
+
+        /*reset CSS*/
+        *{font-family:arial;}
+        ul,li{list-style:none;margin:0;padding:0;}
+        
     </style>
 
 </head>
@@ -54,10 +141,10 @@
 
             <div class="navbar-header">
                 <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                         <span class="icon icon-bar"></span>
-                         <span class="icon icon-bar"></span>
-                         <span class="icon icon-bar"></span>
-                    </button>
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+                </button>
 
                 <!-- lOGO TEXT HERE -->
                 <a href="index.html" class="navbar-brand">CDP Jose Cabrera</a>
@@ -69,6 +156,7 @@
                     <li><a href="#home" class="smoothScroll">Home</a></li>
                     <li><a href="#feature" class="smoothScroll">Estructura del ciclo</a></li>
                     <li><a href="#about" class="smoothScroll">Profesionales</a></li>
+                    <li><a href="#galeria" class="smoothScroll">Galeria</a></li>
                     <li><a href="#testimonial" class="smoothScroll">Antiguos alumnos</a></li>
                     <li><a href="#contact" class="smoothScroll">Contact</a></li>
                 </ul>
@@ -110,11 +198,13 @@
 
                 <div class="col-md-12 col-sm-12">
                     <ul class="nav nav-tabs" role="tablist">
-                        <li class="active"><a href="#tab01" aria-controls="tab01" role="tab" data-toggle="tab">1º Curso</a></li>
+                        <li class="active"><a href="#tab01" aria-controls="tab01" role="tab" data-toggle="tab">1º
+                                Curso</a></li>
 
                         <li><a href="#tab02" aria-controls="tab02" role="tab" data-toggle="tab">2ºCurso</a></li>
 
-                        <li><a href="#tab03" aria-controls="tab03" role="tab" data-toggle="tab">Que vamos a aprender</a></li>
+                        <li><a href="#tab03" aria-controls="tab03" role="tab" data-toggle="tab">Que vamos a aprender</a>
+                        </li>
                     </ul>
 
                     <div class="tab-content">
@@ -129,35 +219,259 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr data-toggle="collapse" data-target="#bd">
                                         <td>0484</td>
                                         <td>Bases de Datos</td>
                                         <td style="text-align:right">6</td>
                                     </tr>
                                     <tr>
+                                        <td class="hiddenRow" colspan="6">
+                                            <div class="collapse" id="bd">
+                                                <p>Descripción:</p>
+
+                                                <p>En este módulo el alumnado aprenderá a:
+                                                    <ul>
+                                                        <li>
+                                                            <p>Reconocer los elementos de las bases de datos analizando
+                                                                sus funciones y valorando la utilidad de los sistemas
+                                                                gestores.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Crear bases de datos definiendo su estructura y las
+                                                                características de sus elementos según el modelo
+                                                                relacional.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Consultar la información almacenada en una base de datos
+                                                                empleando asistentes, herramientas gráficas y el
+                                                                lenguaje de manipulación de datos.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Modificar la información almacenada en la base de datos
+                                                                empleando asistentes, herramientas gráficas y el
+                                                                lenguaje de manipulación de datos.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Desarrollar procedimientos almacenadores evaluando y
+                                                                utilizando las sentencias del lenguaje incorporado en el
+                                                                sistema gestor de base de datos.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Diseñar modelos relacionales normalizados interpretando
+                                                                diagramas entidad/relación.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Gestionar la información almacenada en bases de datos
+                                                                objeto-relacionales, evaluando y utilizando las
+                                                                posibilidades que proporciona el sistema gestor.</p>
+                                                        </li>
+                                                    </ul>
+                                                </p>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                    <tr data-toggle="collapse" data-target="#ed">
                                         <td>0487</td>
                                         <td>Entornos de desarrollo</td>
                                         <td style="text-align:right">3</td>
                                     </tr>
                                     <tr>
+                                        <td colspan="6" class="hiddenRow">
+                                            <div id="ed" class="collapse">
+                                                <p>Descripción:</p>
+
+                                                <p>En este módulo el alumnado aprenderá a:
+                                                    <ul>
+                                                        <li>
+                                                            <p>Reconocer los elementos de las bases de datos analizando
+                                                                sus funciones y valorando la utilidad de los sistemas
+                                                                gestores.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Crear bases de datos definiendo su estructura y las
+                                                                características de sus elementos según el modelo
+                                                                relacional.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Consultar la información almacenada en una base de datos
+                                                                empleando asistentes, herramientas gráficas y el
+                                                                lenguaje de manipulación de datos.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Modificar la información almacenada en la base de datos empleando asistentes, herramientas gráficas y el lenguaje de manipulación de datos.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Desarrollar procedimientos almacenadores evaluando y utilizando las sentencias del lenguaje incorporado en el sistema gestor de base de datos.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Diseñar modelos relacionales normalizados interpretando diagramas entidad/relación.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Gestionar la información almacenada en bases de datos objeto-relacionales, evaluando y utilizando las posibilidades que proporciona el sistema gestor.</p>
+                                                        </li>
+                                                    </ul>
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-toggle="collapse" data-target="#fol">
                                         <td>0617</td>
                                         <td>Formaci&oacute;n y orientaci&oacute;n laboral</td>
                                         <td style="text-align:right">3</td>
                                     </tr>
                                     <tr>
+                                        <td colspan="6" class="hiddenRow">
+                                            <div id="fol" class="collapse">
+                                                <p>Descripción:</p>
+
+                                                <p>En este módulo el alumnado aprenderá a:
+                                                    <ul>
+                                                        <li>
+                                                            <p>Seleccionar oportunidades de empleo, identificando las diferentes posibilidades de inserción y las alternativas de aprendizaje a lo largo de la vida.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Aplicar las estrategias del trabajo en equipo , valorando su eficacia y eficiencia para la consecución de los objetivos de la organización.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Ejercer los derechos y cumplir las obligaciones que se derivan de las relaciones laborales, reconociéndolas en los diferentes contratos de trabajo.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Determinar la acción protectora del sistema de la Seguridad Social ante las distintas contingencias cubiertas , identificando las distintas clases de prestaciones.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Evaluar los riesgos derivados de su actividad, analizando las condiciones de trabajo y los factores de riesgo presentes en su entorno laboral.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Participar en la elaboración de un plan de prevención de riesgos en una pequeña empresa, identificando las responsabilidades de todos los agentes implicados.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Aplicar las medidas de prevención y protección, analizando las situaciones de riesgo en el entorno laboral del técnico superior en este ciclo formativo concreto.</p>
+                                                        </li>
+                                                    </ul> 
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-toggle="collapse" data-target="#lm">
                                         <td>0373</td>
                                         <td>Lenguajes de marcas y sistemas de gesti&oacute;n de informaci&oacute;n</td>
                                         <td style="text-align:right">4</td>
                                     </tr>
                                     <tr>
+                                        <td colspan="6" class="hiddenRow">
+                                            <div id="lm" class="collapse">
+                                                <p>Descripción:</p>
+
+                                                <p>En este módulo el alumnado aprenderá a:
+                                                    <ul>
+                                                        <li>
+                                                            <p>Reconocer las características de lenguajes de marcas analizando e interpretando fragmentos de código.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Utilizar lenguajes de marcas para la transmisión de información a través de la web analizando la estructura de los documentos e identificando sus elementos.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Generar canales de contenidos analizando y utilizando tecnologías de sindicación.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Establecer mecanismos de validación para documentos XML utilizando métodos para definir su sintaxis y estructura.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Realizar conversiones sobre documentos XML utilizando técnicas y herramientas de procesamiento.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Gestionar información en formato XML analizando y utilizando tecnologías de almacenamiento y lenguajes de consulta.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Operar sistemas empresariales de gestión de información realizando tareas de importación, integración, aseguramiento y extracción de la información</p>
+                                                        </li>
+                                                    </ul> 
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-toggle="collapse" data-target="#p">
                                         <td>0485</td>
                                         <td>Programaci&oacute;n</td>
                                         <td style="text-align:right">8</td>
                                     </tr>
                                     <tr>
+                                        <td colspan="6" class="hiddenRow">
+                                            <div id="p" class="collapse">
+                                                <p>Descripción:</p>
+
+                                                <p>En este módulo el alumnado aprenderá a:
+                                                    <ul>
+                                                        <li>
+                                                            <p>Reconocer la estructura de un programa informático, identificando y relacionando los elementos propios del lenguaje de programación utilizado.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Escribir y probar programas sencillos, reconociendo y aplicando los fundamentos de la programación orientada a objetos.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Escribir y depurar código, analizando y utilizando las estructuras de control del lenguaje.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Desarrollar programas organizados en clases analizando y aplicando los principios de la programación orientada a objetos.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Realizar operaciones de entrada y salida de información utilizando procedimientos específicos del lenguaje y librerías de clases.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Escribir programas que manipulen información seleccionando y utilizando tipos avanzados de datos.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Desarrollar programas aplicando características avanzadas de los lenguajes orientados a objetos y del entorno de programación.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Utilizar bases de datos orientadas a objetos, analizando sus características y aplicando técnicas para mantener la persistencia de la información.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Gestionar información almacenada en bases de datos relacionales manteniendo la integridad y consistencia de los datos.</p>
+                                                        </li>
+                                                    </ul> 
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-toggle="collapse" data-target="#si">
                                         <td>0483</td>
                                         <td>Sistemas inform&aacute;ticos</td>
                                         <td style="text-align:right">6</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6" class="hiddenRow">
+                                            <div id="si" class="collapse">
+                                                <p>Descripción:</p>
+
+                                                <p>En este módulo el alumnado aprenderá a:
+                                                    <ul>
+                                                        <li>
+                                                            <p>Evaluar sistemas informáticos identificando sus componentes y características.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Instalar sistemas operativos planificando el proceso e interpretando documentación técnica</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Gestionar la información del sistema identificando las estructuras de almacenamiento y aplicando medidas para asegurar la integridad de los datos.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Gestionar sistemas operativos utilizando comandos y herramientas gráficas y evaluando las necesidades del sistema</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Interconectar sistemas de red configurando dispositivos y protocolos.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Operar sistemas de red gestionando sus recursos e identificando las restricciones de seguridad existentes.</p>
+                                                        </li>
+                                                        <li>
+                                                            <p>Elaborar documentación valorando y utilizando aplicaciones informáticas de propósito general</p>
+                                                        </li>
+                                                    </ul> 
+                                                </p>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -177,45 +491,257 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr data-toggle="collapse" data-target="#DWC">
                                             <td>0612</td>
                                             <td>Desarrollo web en entorno cliente</td>
                                             <td style="text-align:right">6</td>
                                         </tr>
                                         <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="DWC" class="collapse">
+                                                    <p>Descripción:</p>
+    
+                                                    <p>En este módulo el alumnado aprenderá a:
+                                                        <ul>
+                                                            <li>
+                                                                <p>Seleccionar las arquitecturas y tecnologías de programación sobre clientes Web, identificando y analizando las capacidades y características de cada una.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Escribir sentencias simples, aplicando la sintaxis del lenguaje y verificando su ejecución sobre navegadores Web.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Escribir código, identificando y aplicando las funcionalidades aportadas por los objetos predefinidos del lenguaje.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Programar código para clientes Web analizando y utilizando estructuras definidas por el usuario.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Desarrollar aplicaciones Web interactivas integrando mecanismos de manejo de eventos.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Desarrollar aplicaciones Web analizando y aplicando las características del modelo de objetos del documento.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Desarrollar aplicaciones Web dinámicas, reconociendo y aplicando mecanismos de comunicación asíncrona entre cliente y servidor.</p>
+                                                            </li>
+                                                        </ul> 
+                                                    </p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr data-toggle="collapse" data-target="#DES">
                                             <td>0613</td>
                                             <td>Desarrollo web en entorno servidor</td>
                                             <td style="text-align:right">8</td>
                                         </tr>
                                         <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="DES" class="collapse">
+                                                    <p>Descripción:</p>
+    
+                                                    <p>En este módulo el alumnado aprenderá a:
+                                                        <ul>
+                                                            <li>
+                                                                <p>Seleccionar las arquitecturas y tecnologías de programación Web en entorno servidor, analizando sus capacidades y características propias.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Escribir sentencias ejecutables por un servidor Web reconociendo y aplicando procedimientos de integración del código en lenguajes de marcas.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Escribir bloques de sentencias embebidos en lenguajes de marcas, seleccionando y utilizando las estructuras de programación.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Desarrollar aplicaciones Web embebidas en lenguajes de marcas analizando e incorporando funcionalidades según especificaciones.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Desarrollar aplicaciones Web identificando y aplicar mecanismos para separar el código de presentación de la lógica de negocio.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Desarrollar aplicaciones de acceso a almacenes de datos, aplicando medidas para mantener la seguridad y la integridad de la información.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Desarrollar servicios Web analizando su funcionamiento e implantar la estructura de sus componentes.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Generar páginas Web dinámicas analizando, utilizando tecnologías del servidor Web que añadan código al lenguaje de marcas.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Desarrollar aplicaciones Web híbridas seleccionando, utilizando librerías de código y repositorios heterogéneos de información.</p>
+                                                            </li>
+                                                        </ul> 
+                                                    </p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr data-toggle="collapse" data-target="#DAW">
                                             <td>0614</td>
                                             <td>Despliegue de aplicaciones web</td>
                                             <td style="text-align:right">3</td>
                                         </tr>
                                         <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="DAW" class="collapse">
+                                                    <p>Descripción:</p>
+    
+                                                    <p>En este módulo el alumnado aprenderá a:
+                                                        <ul>
+                                                            <li>
+                                                                <p>Implantar arquitecturas Web analizando y aplicando criterios de funcionalidad.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Gestionar servidores Web, evaluando y aplicando criterios de configuración para el acceso seguro a los servicios.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Implantar aplicaciones Web en servidores de aplicaciones, evaluando y aplicando criterios de configuración para su funcionamiento seguro.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Administrar servidores de transferencia de archivos, evaluando y aplicando criterios de configuración que garanticen la disponibilidad del servicio.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Elaborar la documentación de la aplicación Web evaluando y seleccionando herramientas de generación de documentación y control de versiones.</p>
+                                                            </li>
+                                                        </ul> 
+                                                    </p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr data-toggle="collapse" data-target="#DIW">
                                             <td>0615</td>
                                             <td>Dise&ntilde;o de interfaces WEB</td>
                                             <td style="text-align:right">6</td>
                                         </tr>
                                         <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="DIW" class="collapse">
+                                                    <p>Descripción:</p>
+    
+                                                    <p>En este módulo el alumnado aprenderá a:
+                                                        <ul>
+                                                            <li>
+                                                                <p>Planificar la creación de una interfaz web valorando y aplicando especificaciones de diseño.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Crear interfaces Web homogéneos definiendo y aplicando estilos.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Preparar archivos multimedia para la Web, analizando sus características y manejando herramientas especificas.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Integrar contenido multimedia en documentos Web valorando su aportación y seleccionando adecuadamente los elementos interactivos.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Desarrollar interfaces Web accesibles, analizando las pautas establecidas y aplicando técnicas de verificación.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Desarrollar interfaces Web amigables analizando y aplicando las pautas de usabilidad establecidas.</p>
+                                                            </li>
+                                                        </ul> 
+                                                    </p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr data-toggle="collapse" data-target="#eie">
                                             <td>0618</td>
                                             <td>Empresa e iniciativa emprendedora</td>
                                             <td style="text-align:right">4</td>
                                         </tr>
                                         <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="eie" class="collapse">
+                                                    <p>Descripción:</p>
+    
+                                                    <p>En este módulo el alumnado aprenderá a:
+                                                        <ul>
+                                                            <li>
+                                                                <p>Reconocer las capacidades asociadas a la iniciativa emprendedora, analizando los requerimientos derivados de los puestos de trabajo y de las actividades empresariales.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Definir la oportunidad de creación de una pequeña empresa, valorando el impacto sobre el entorno de actuación e incorporando valores éticos.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Realizar las actividades para la constitución y puesta en marcha de una empresa, seleccionando la forma jurídica e identificando las obligaciones legales asociadas.</p>
+                                                            </li>
+                                                            <li>
+                                                                <p>Realizar actividades de gestión administrativa y financiera básica de una «pyme», identificando las principales obligaciones contables y fiscales y cumplimentando la documentación.</p>
+                                                            </li>
+                                                        </ul> 
+                                                    </p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr data-toggle="collapse" data-target="#fct">
+
                                             <td>0619</td>
                                             <td>Formaci&oacute;n en centros de trabajo</td>
                                             <td style="text-align:right">0</td>
                                         </tr>
                                         <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="fct" class="collapse">
+                                                    <p>Descripción:</p>
+                                                    
+                                                    <p>
+                                                        Con este módulo tendrás la oportunidad de estar en contacto directo con las empresas relacionadas con el ámbito del Desarrollo de Aplicaciones Web. Gracias a él contribuyes a completar las competencias propias de este título que ya has alcanzado a través de las enseñanzas del resto de módulos. Es una experiencia personal y una oportunidad de conocer el ámbito profesional al que pertenecerás una vez que obtengas la titulación y un punto de encuentro donde contarás con la posibilidad de trabajar con profesionales con experiencia.
+                                                    </p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr data-toggle="collapse" data-target="#si">
                                             <td>0000</td>
                                             <td>Horas de libre configuraci&oacute;n</td>
                                             <td style="text-align:right">3</td>
                                         </tr>
                                         <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="ed" class="collapse">
+                                                    <p>Descripción:</p>
+    
+                                                    <p>En este módulo el alumnado aprenderá a:
+                                                        <ul>
+                                                            <li>
+                                                                <p></p>
+                                                            </li>
+                                                            <li>
+                                                                <p></p>
+                                                            </li>
+                                                            <li>
+                                                                <p></p>
+                                                            </li>
+                                                            <li>
+                                                                <p></p>
+                                                            </li>
+                                                            <li>
+                                                                <p></p>
+                                                            </li>
+                                                            <li>
+                                                                <p></p>
+                                                            </li>
+                                                            <li>
+                                                                <p></p>
+                                                            </li>
+                                                        </ul> 
+                                                    </p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr data-toggle="collapse" data-target="#pdaw">
                                             <td>0616</td>
                                             <td>Proyecto de desarrollo de aplicaciones web</td>
                                             <td style="text-align:right">0</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="hiddenRow">
+                                                <div id="pdaw" class="collapse">
+                                                    <p>Descripción:</p>
+    
+                                                    <p>
+                                                        En el módulo profesional de Proyecto de Desarrollo de Aplicaciones Web se realizará un proyecto donde el alumno pueda poner a prueba los conocimientos adquiridos a lo largo del Ciclo Formativo.
+                                                    </p>  
+                                                    <p> 
+                                                        Para ello, el alumno primero realizará un estudio para identificar las necesidades del sector productivo de su zona con el objetivo de determinar la Aplicación Web a desarrollar. Para el desarrollo de la aplicación, el alumno deberá realizar las fases de análisis, diseño, programación y prueba para garantizar que la aplicación cumpla con las funcionalidades requeridas.
+                                                    </p>
+                                                </div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -258,7 +784,8 @@
                                                 <b style="text-align: center;">JavaScript</b>
                                             </td>
                                             <td>
-                                                <img src="images/PhpMyAdmin_logo.png" style="width: 100px;height: 100px;"><br>
+                                                <img src="images/PhpMyAdmin_logo.png"
+                                                    style="width: 100px;height: 100px;"><br>
                                                 <b style="text-align: center;">PHPMyAdmin</b>
                                             </td>
                                         </tr>
@@ -292,7 +819,8 @@
                         <div class="team-info team-thumb-up">
                             <h2>Jose Maria</h2>
                             <small>Ingeniero Informatico</small>
-                            <p>Ha trabajado durante años para Moviestar.Experto en el sector de las bases de datos y Frontend</p>
+                            <p>Ha trabajado durante años para Moviestar.Experto en el sector de las bases de datos y
+                                Frontend</p>
                         </div>
                     </div>
                 </div>
@@ -333,6 +861,87 @@
         </div>
     </section>
 
+    <!-- GALERIA -->
+    <section id="galeria" data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="image-gallery">  
+                <div class="big-image">           
+                  <img id="image1" src="https://scontent-a-lhr.xx.fbcdn.net/hphotos-ash3/t31/131358_10151844912596933_1989911666_o.jpg" />
+                  <img id="image2" src="https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-ash3/1555340_10151833079796933_514060703_n.jpg" />
+                  <img id="image3" src="https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-ash3/t1/1609599_10151831839976933_658574256_n.jpg" />
+                  <img id="image4" src="https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-ash3/t1/994649_10151755587611933_1087155071_n.jpg" />
+                 <img id="image5" src="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-frc3/1465393_10151748409251933_1334965435_n.jpg" />
+                  <img id="image6" src="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-ash3/t31/1275506_10151567309241933_1488282073_o.jpg" />
+                  <img id="image7" src="https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-frc3/t31/1266700_10151567307011933_1129954676_o.jpg" />
+                  <img id="image8" src="https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-prn2/t31/1262789_10151567305786933_905681282_o.jpg" />
+                  <img id="image9" src="https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-prn2/1232978_10151567304551933_1620341923_o.jpg" />
+                  <img id="image10" src="https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-ash3/t31/1268956_10151567298081933_950767294_o.jpg" />
+                  <img id="image11" src="https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-frc3/1546119_10151833076886933_491995071_n.jpg" />
+                  <img id="image12" src="https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-frc3/1546119_10151833076886933_491995071_n.jpg" />
+                  <img id="image13" src="https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-prn1/t1/1522259_10151820209156933_150422153_n.jpg" />
+                  <img id="image14" src="https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-ash3/t1/374530_10151749868451933_1691020813_n.jpg" />
+                  <img id="image15" src="https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-prn2/t1/1460274_10151749868211933_461565122_n.jpg" />
+                  <img id="image16" src="https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-prn2/1291311_10151567305376933_826273627_o.jpg" />    
+                  <img id="default" src="https://scontent-a-lhr.xx.fbcdn.net/hphotos-ash3/t31/131358_10151844912596933_1989911666_o.jpg" />
+                </div>  
+                
+                
+                <a class="button prev"><</a>
+                <a class="button next">></a>  
+                <div class="thumbs">  
+                <ul>    
+                  <li>
+                    <a href="#image1"><img  src="https://scontent-a-lhr.xx.fbcdn.net/hphotos-ash3/t31/131358_10151844912596933_1989911666_o.jpg" /></a></li>
+                  <li>
+                    <a href="#image2"><img  src="https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-ash3/1555340_10151833079796933_514060703_n.jpg" /></a>
+                  </li>
+                  <li>
+                     <a href="#image3"><img  src="https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-ash3/t1/1609599_10151831839976933_658574256_n.jpg" /></a>
+                  </li>
+                  <li>
+                     <a href="#image4"><img  src="https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-ash3/t1/994649_10151755587611933_1087155071_n.jpg" /></a>
+                  </li>
+                  <li>
+                     <a href="#image5"><img  src="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-frc3/1465393_10151748409251933_1334965435_n.jpg" /></a>
+                  </li>
+                      <li>
+                     <a href="#image6"><img  src="https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-ash3/t31/1275506_10151567309241933_1488282073_o.jpg" /></a>
+                  </li>
+                      <li>
+                     <a href="#image7"><img  src="https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-frc3/t31/1266700_10151567307011933_1129954676_o.jpg" /></a>
+                  </li>
+                      <li>
+                     <a href="#image8"><img  src="https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-prn2/t31/1262789_10151567305786933_905681282_o.jpg" /></a>
+                  </li>
+                      <li>
+                     <a href="#image9"><img  src="https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-prn2/1232978_10151567304551933_1620341923_o.jpg" /></a>
+                  </li>
+                      <li>
+                     <a href="#image10"><img  src="https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-ash3/t31/1268956_10151567298081933_950767294_o.jpg" /></a>
+                  </li>
+                      <li>
+                     <a href="#image11"><img  src="https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-frc3/1546119_10151833076886933_491995071_n.jpg" /></a>
+                  </li>
+                      <li>
+                     <a href="#image12"><img  src="https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-frc3/1546119_10151833076886933_491995071_n.jpg" /></a>
+                  </li>
+                      <li>
+                     <a href="#image13"><img  src="https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-prn1/t1/1522259_10151820209156933_150422153_n.jpg" /></a>
+                  </li>
+                      <li>
+                     <a href="#image14"><img  src="https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-ash3/t1/374530_10151749868451933_1691020813_n.jpg" /></a>
+                  </li>
+                      <li>
+                     <a href="#image15"><img  src="https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-prn2/t1/1460274_10151749868211933_461565122_n.jpg" /></a>
+                  </li>
+                      <li>
+                     <a href="#image16"><img  src="https://fbcdn-sphotos-c-a.akamaihd.net/hphotos-ak-prn2/1291311_10151567305376933_826273627_o.jpg" /></a>
+                  </li>
+                </ul>
+                </div>
+              </div>  
+        </div>
+    </section>
 
     <!-- TESTIMONIAL -->
     <section id="testimonial" data-stellar-background-ratio="0.5">
@@ -352,7 +961,8 @@
 
                         <div class="owl-carousel owl-theme">
                             <div class="item">
-                                <h3>Vestibulum tempor facilisis efficitur. Sed nec nisi sit amet nibh pellentesque elementum. In viverra ipsum ornare sapien rhoncus ullamcorper.</h3>
+                                <h3>Vestibulum tempor facilisis efficitur. Sed nec nisi sit amet nibh pellentesque
+                                    elementum. In viverra ipsum ornare sapien rhoncus ullamcorper.</h3>
                                 <div class="testimonial-item">
                                     <img src="images/tst-image1.jpg" class="img-responsive" alt="Michael">
                                     <h4>Michael</h4>
@@ -360,7 +970,8 @@
                             </div>
 
                             <div class="item">
-                                <h3>Donec pretium tristique elit eget sodales. Pellentesque posuere, nunc id interdum venenatis, leo odio cursus sapien, ac malesuada nisl libero eget urna.</h3>
+                                <h3>Donec pretium tristique elit eget sodales. Pellentesque posuere, nunc id interdum
+                                    venenatis, leo odio cursus sapien, ac malesuada nisl libero eget urna.</h3>
                                 <div class="testimonial-item">
                                     <img src="images/tst-image2.jpg" class="img-responsive" alt="Sofia">
                                     <h4>Sofia</h4>
@@ -368,7 +979,8 @@
                             </div>
 
                             <div class="item">
-                                <h3>Lorem ipsum dolor sit amet, consectetur adipisicing eiusmod tempor incididunt ut labore et dolore magna.</h3>
+                                <h3>Lorem ipsum dolor sit amet, consectetur adipisicing eiusmod tempor incididunt ut
+                                    labore et dolore magna.</h3>
                                 <div class="testimonial-item">
                                     <img src="images/tst-image3.jpg" class="img-responsive" alt="Monica">
                                     <h4>Monica</h4>
@@ -403,7 +1015,8 @@
                             <input type="submit" class="form-control" name="Enviar" value="Send Message">
                         </div>
                         <div class="col-md-12 col-sm-12">
-                            <textarea class="form-control" rows="8" placeholder="Mensaje" name="message" required=""></textarea>
+                            <textarea class="form-control" rows="8" placeholder="Mensaje" name="message"
+                                required=""></textarea>
                         </div>
                     </form>
                 </div>
@@ -428,7 +1041,8 @@
                     <div class="col-md-6 col-sm-6">
                         <ul class="social-icon">
                             <li>
-                                <a href="https://es-es.facebook.com/cdpjosecabrera" class="fa fa-facebook-square" attr="facebook icon"></a>
+                                <a href="https://es-es.facebook.com/cdpjosecabrera" class="fa fa-facebook-square"
+                                    attr="facebook icon"></a>
                             </li>
                             <li>
                                 <a href="https://twitter.com/cdpjosecabrera?lang=es" class="fa fa-twitter"></a>
