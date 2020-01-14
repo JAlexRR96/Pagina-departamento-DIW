@@ -22,12 +22,12 @@
     <link rel="stylesheet" href="css/owl.carousel.css">
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
-
+    <link rel="stylesheet" type="text/css" href="stylescss.scss" media="screen" />
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="css/tooplate-style.css">
     <script>
-        $('.collapse').on('show.bs.collapse', function () {
-            $('.collapse.in').collapse('hide');
+        $(function () {
+            $("#mdb-lightbox-ui").load("mdb-addons/mdb-lightbox-ui.html");
         });
     </script>
 
@@ -49,76 +49,6 @@
         a{
             cursor:pointer;
         }
-
-        /*Gallery Container*/
-        .image-gallery{
-            position:relative;  
-            margin:0 auto;
-            width:600px;  
-            border-radius:20px;  
-        }
-        /*Sets Big Image style*/
-        .image-gallery .big-image{
-            width:600px;
-            height:360px;   
-            margin:0 auto;  
-            position:relative;
-        }
-        .image-gallery .big-image img{
-            opacity:0;position:absolute;left:0px;top:0px; width:600px;
-            margin:0 auto;
-            transition: opacity 350ms;   
-        }
-
-        /*Selected image display*/
-        .image-gallery .big-image img:target{opacity:1;}
-        /*on select image display none the default image*/
-        .image-gallery .big-image img:target ~ img#default{opacity:0;}
-
-        /*Show Default Image in first load*/
-        .image-gallery .big-image img#default{opacity:1;}
-
-
-        /***Button***/
-        .image-gallery .button{
-            font-weight:bold;
-            font-size:30px;
-            display:inline-block;
-            transform:scale(1,2);
-            background-color:#ccc;
-            color:#222;
-            padding:0 10px;   
-        }
-        .image-gallery .prev{position:absolute; left:0; top:378px;}
-        .image-gallery .next{position:absolute; right:0; top:378px;}
-
-        /***move thumbs on click on buttons***/
-        .image-gallery .prev:active ~ .thumbs  ul{
-            transform:translateX(0%);
-            transition:3s all;
-        }
-        .image-gallery  .next:active ~ .thumbs  ul{
-            transform:translateX(-90%);
-            transition:3s all;  
-        }
-            
-        /***thumbs***/
-        .image-gallery .thumbs{
-            overflow:hidden; white-space:nowrap; margin:0 45px;
-        }
-        .image-gallery .thumbs ul{
-            float:left; transition:999999s all; transform:translateX(0);
-        }
-        .image-gallery .thumbs li{display:inline-block; margin-right:3px;}
-        .image-gallery .thumbs li a:hover{opacity:1;}
-        .image-gallery .thumbs li a{opacity:0.85;}
-        .image-gallery .thumbs li a:focus{opacity:1;}
-        .image-gallery .thumbs li img{width:128px;}
-
-        /*reset CSS*/
-        *{font-family:arial;}
-        ul,li{list-style:none;margin:0;padding:0;}
-        
     </style>
 
 </head>
@@ -863,154 +793,81 @@
 
     <!-- GALERIA -->
     <section id="galeria" data-stellar-background-ratio="0.5">
-        <div class="container">
-            <div class="image-gallery">  
-                <div class="big-image">           
-                  <img id="image1" src="fotos/20190508_120055.jpg" />
-                  <img id="image2" src="fotos/20190508_125709.jpg" />
-                  <img id="image3" src="fotos/IMG-20191115-WA0000.jpeg" />
-                  <img id="image4" src="fotos/IMG-20191115-WA0002.jpeg" />
-                 <img id="image5" src="fotos/IMG-20191115-WA0004.jpeg" />
-                  <img id="image6" src="fotos/IMG-20191115-WA0006.jpeg" />
-                  <img id="image7" src="fotos/IMG-20191115-WA0008.jpeg" />
-                  <img id="image8" src="fotos/IMG-20191115-WA0010.jpeg" />
-                  <img id="image9" src="fotos/IMG-20191115-WA0015.jpeg" />
-                  <img id="image10" src="fotos/IMG-20191115-WA0017.jpg" />
-                  <img id="image11" src="fotos/IMG-20191115-WA0018.jpg" />
-                  <img id="image12" src="fotos/IMG-20191115-WA0020.jpeg" />
-                  <img id="image13" src="fotos/IMG_20190508_114644.jpg" />
-                  <img id="image14" src="fotos/IMG_20190508_114646.jpg" />
-                  <img id="image15" src="fotos/IMG_20191030_125052.jpg" />
-                  <img id="image16" src="fotos/IMG_20191030_125054.jpg" />
-                  <img id="image17" src="fotos/IMG_20191030_125123.jpg" />
-                  <img id="image18" src="fotos/IMG_20191030_125055.jpg" />
-                  <img id="image19" src="fotos/IMG_20191030_125126.jpg" />
-                  <img id="image20" src="fotos/IMG_20191030_125134.jpg" />
-                  <img id="image21" src="fotos/IMG_20191030_125136.jpg" />
-                  <img id="image22" src="fotos/IMG_20191115_165558.jpg" />    
-                  <img id="image23" src="fotos/IMG_20191115_181004.jpg" />
-                  <img id="image24" src="fotos/IMG_20191115_181005.jpg" />
-                  <img id="image25" src="fotos/IMG_20191115_181007.jpg" />
-                  <img id="image26" src="fotos/IMG_20191115_182810.jpg" />
-                  <img id="image27" src="fotos/IMG_20191115_182811.jpg" />
-                  <img id="image28" src="fotos/IMG_20191115_182813.jpg" />
-                  <img id="image29" src="fotos/IMG_20191115_182814.jpg" />
-                  <img id="image30" src="fotos/IMG_20191115_182815.jpg" />
-                  <img id="image31" src="fotos/IMG_20191115_182817.jpg" />
-                  <img id="image32" src="fotos/IMG_20191115_182818.jpg" />
-                  <img id="image33" src="fotos/IMG_20191115_182819.jpg" />
+       
+<div class="row">
+    <div class="col-md-12">
 
-                  <img id="default" src="fotos/20190508_120055.jpg" />
-                </div>  
-                
-                
-                <a class="button prev"></a>
-                <a class="button next"></a>  
-                <div class="thumbs">  
-                <ul>    
-                  <li>
-                    <a href="#image1"><img  src="fotos/20190508_120055.jpg" /></a>
-                </li>
-                  <li>
-                    <a href="#image2"><img  src="fotos/20190508_125709.jpg" /></a>
-                  </li>
-                  <li>
-                     <a href="#image3"><img  src="fotos/IMG-20191115-WA0000.jpeg" /></a>
-                  </li>
-                  <li>
-                     <a href="#image4"><img  src="fotos/IMG-20191115-WA0002.jpeg" /></a>
-                  </li>
-                  <li>
-                     <a href="#image5"><img  src="fotos/IMG-20191115-WA0004.jpeg" /></a>
-                  </li>
-                      <li>
-                     <a href="#image6"><img  src="fotos/IMG-20191115-WA0006.jpeg" /></a>
-                  </li>
-                      <li>
-                     <a href="#image7"><img  src="fotos/IMG-20191115-WA0008.jpeg" /></a>
-                  </li>
-                      <li>
-                     <a href="#image8"><img  src="fotos/IMG-20191115-WA0010.jpeg" /></a>
-                  </li>
-                      <li>
-                     <a href="#image9"><img  src="fotos/IMG-20191115-WA0015.jpeg" /></a>
-                  </li>
-                      <li>
-                     <a href="#image10"><img  src="fotos/IMG-20191115-WA0017.jpg" /></a>
-                  </li>
-                      <li>
-                     <a href="#image11"><img  src="fotos/IMG-20191115-WA0018.jpg" /></a>
-                  </li>
-                      <li>
-                     <a href="#image12"><img  src="fotos/IMG-20191115-WA0020.jpeg" /></a>
-                  </li>
-                      <li>
-                     <a href="#image13"><img  src="fotos/IMG_20190508_114644.jpg" /></a>
-                  </li>
-                      <li>
-                     <a href="#image14"><img  src="fotos/IMG_20190508_114646.jpg" /></a>
-                  </li>
-                      <li>
-                     <a href="#image15"><img  src="fotos/IMG_20191030_125052.jpg" /></a>
-                  </li>
-                      <li>
-                     <a href="#image16"><img  src="fotos/IMG_20191030_125054.jpg" /></a>
-                  </li>
-                  <li>
-                    <a href="#image17"><img  src="fotos/IMG_20191030_125123.jpg" /></a>
-                 </li>
-                 <li>
-                    <a href="#image18"><img  src="fotos/IMG_20191030_125055.jpg" /></a>
-                 </li>
-                 <li>
-                    <a href="#image19"><img  src="fotos/IMG_20191030_125126.jpg" /></a>
-                 </li>
-                 <li>
-                    <a href="#image20"><img  src="fotos/IMG_20191030_125134.jpg" /></a>
-                 </li>
-                 <li>
-                    <a href="#image21"><img  src="fotos/IMG_20191030_125136.jpg" /></a>
-                 </li>
-                 <li>
-                    <a href="#image22"><img  src="fotos/IMG_20191115_165558.jpg" /></a>
-                 </li>
-                 <li>
-                    <a href="#image23"><img  src="fotos/IMG_20191115_181004.jpg" /></a>
-                 </li>
-                 <li>
-                    <a href="#image24"><img  src="fotos/IMG_20191115_181005.jpg" /></a>
-                 </li>
-                 <li>
-                    <a href="#image25"><img  src="fotos/IMG_20191115_181007.jpg" /></a>
-                 </li>
-                 <li>
-                    <a href="#image26"><img  src="fotos/IMG_20191115_182810.jpg" /></a>
-                 </li>
-                 <li>
-                    <a href="#image27"><img  src="fotos/IMG_20191115_182811.jpg" /></a>
-                 </li>
-                 <li>
-                    <a href="#image28"><img  src="fotos/IMG_20191115_182813.jpg" /></a>
-                 </li>
-                 <li>
-                    <a href="#image29"><img  src="fotos/IMG_20191115_182814.jpg" /></a>
-                 </li>
-                 <li>
-                    <a href="#image30"><img  src="fotos/IMG_20191115_182815.jpg" /></a>
-                 </li>
-                 <li>
-                    <a href="#image31"><img  src="fotos/IMG_20191115_182817.jpg" /></a>
-                 </li>
-                 <li>
-                    <a href="#image32"><img  src="fotos/IMG_20191115_182818.jpg" /></a>
-                 </li>
-                 <li>
-                    <a href="#image33"><img  src="fotos/IMG_20191115_182819.jpg" /></a>
-                 </li>
-                </ul>
-                </div>
-              </div>  
+        <div id="mdb-lightbox-ui"></div>
+
+            <div class="mdb-lightbox no-margin">
+
+                <figure class="col-md-4">
+                    <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg" data-size="1600x1067">
+                    <img alt="picture" src="fotos/20190508_120055.jpg" width="100%"  height="100%" class="img-fluid">
+                    </a>
+                </figure>
+
+                <figure class="col-md-4">
+                    <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(98).jpg" data-size="1600x1067">
+                    <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(98).jpg"
+                        class="img-fluid" />
+                    </a>
+                </figure>
+
+                <figure class="col-md-4">
+                    <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(131).jpg" data-size="1600x1067">
+                    <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(131).jpg"
+                        class="img-fluid" />
+                    </a>
+                </figure>
+
+                <figure class="col-md-4">
+                    <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(123).jpg" data-size="1600x1067">
+                    <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(123).jpg"
+                        class="img-fluid" />
+                    </a>
+                </figure>
+
+                <figure class="col-md-4">
+                    <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(118).jpg" data-size="1600x1067">
+                    <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(118).jpg"
+                        class="img-fluid" />
+                    </a>
+                </figure>
+
+                <figure class="col-md-4">
+                    <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(128).jpg" data-size="1600x1067">
+                    <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(128).jpg"
+                        class="img-fluid" />
+                    </a>
+                </figure>
+
+                <figure class="col-md-4">
+                    <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(132).jpg" data-size="1600x1067">
+                    <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(132).jpg"
+                        class="img-fluid" />
+                    </a>
+                </figure>
+
+                <figure class="col-md-4">
+                    <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(115).jpg" data-size="1600x1067">
+                    <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(115).jpg"
+                        class="img-fluid" />
+                    </a>
+                </figure>
+
+                <figure class="col-md-4">
+                    <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(133).jpg" data-size="1600x1067">
+                    <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(133).jpg"
+                        class="img-fluid" />
+                    </a>
+                </figure>
+
+            </div>
+
         </div>
+    </div>
+</div>
     </section>
 
     <!-- TESTIMONIAL -->
